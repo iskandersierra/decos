@@ -1,3 +1,2 @@
-import { myFunc } from './private/utils';
+import { decorateWith, decorateWithOptions } from './private/utils';
 
-export * from './private/utils';
