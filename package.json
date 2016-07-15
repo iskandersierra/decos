@@ -10,5 +10,9 @@
     "decorators"
   ],
   "author": "Iskander Sierra",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^1.8.10",
+    "typings": "^1.3.1"
+  }
 }
