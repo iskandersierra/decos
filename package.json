@@ -1,0 +1,14 @@
+{
+  "name": "decos",
+  "version": "0.0.0",
+  "description": "Common and usefull decorators",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "decorators"
+  ],
+  "author": "Iskander Sierra",
+  "license": "ISC"
+}
