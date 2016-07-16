@@ -17,7 +17,19 @@
     "clean": "del \"index.js\" \"src/*.js\" "
   },
   "keywords": [
-    "decorators"
+    "es6",
+    "es7",
+    "es2015",
+    "es2016",
+    "decorators",
+    "decorate",
+    "typescript",
+    "javascript",
+    "log",
+    "console",
+    "trace",
+    "debug",
+    "perf"
   ],
   "author": {
     "name": "Iskander Sierra",
