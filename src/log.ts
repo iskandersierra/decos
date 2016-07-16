@@ -4,6 +4,8 @@ export interface LoggerFunction {
     (message: any, ...optionalParams: any[]): void;
 }
 
+export type LogLevel = "debug" | "trace" | "log" | "info" | "warn" | "error" | "off"; 
+
 export interface LogOptions {
     asJson?: boolean;
     logEnter?: boolean;
@@ -15,7 +17,7 @@ export interface LogOptions {
     logResult?: boolean;
     logMoment?: boolean;
     logElapsed?: boolean;
-    level?: "debug" | "trace" | "log" | "info" | "warn" | "error" | "off";
+    level?: LogLevel;
     loggerFunction?: LoggerFunction; 
 }
 
@@ -123,8 +125,9 @@ export const Log = decorateFunction(
                         errorArr.push(error);
                     }
                 }
-                const message = `${ dateStr }${ infoStr }${ options.logParametersOnError ? paramStr : '' }${ errorStr }`;
-                options.loggerFunction.call(undefined, message, ...paramArr, ...errorArr);
+                const errParamsArr = options.logParametersOnError ? paramArr : [];
+                const message = `${ dateStr }${ infoStr }${ elapsedStr }${ options.logParametersOnError ? paramStr : '' }${ errorStr }`;
+                options.loggerFunction.call(undefined, message, ...errParamsArr, ...errorArr);
             }
 
             throw error;
@@ -145,19 +148,35 @@ export const Log = decorateFunction(
                     resultArr.push(result);
                 }
             }
-            const message = `${ dateStr }${ infoStr }${ options.logParametersOnExit ? paramStr : '' }${ resultStr }`;
-            options.loggerFunction.call(undefined, message, ...paramArr, ...resultArr);
+            const outParamsArr = options.logParametersOnExit ? paramArr : [];
+            const message = `${ dateStr }${ infoStr }${ elapsedStr }${ options.logParametersOnExit ? paramStr : '' }${ resultStr }`;
+            options.loggerFunction.call(undefined, message, ...outParamsArr, ...resultArr);
         }
 
         return result;
     }
 );
 
-export const ConsoleLog = Log({ level: "log" });
-export const ConsoleDebug = Log({ level: "debug" });
-export const ConsoleTrace = Log({ level: "trace" });
-export const ConsoleInfo = Log({ level: "info" });
-export const ConsoleWarn = Log({ level: "warn" });
-export const ConsoleError = Log({ level: "error" });
+function createConsoleLog(level: LogLevel, asJson: boolean = false) {
+    return Log({ level, asJson });
+}
 
-export const LogPerf = Log({ logElapsed: true, logParametersOnEnter: false, logEnter: false, logError: false, logExit: true, level: "log" });
+export const ConsoleLog   = createConsoleLog("log");
+export const ConsoleDebug = createConsoleLog("debug");
+export const ConsoleTrace = createConsoleLog("trace");
+export const ConsoleInfo  = createConsoleLog("info");
+export const ConsoleWarn  = createConsoleLog("warn");
+export const ConsoleError = createConsoleLog("error");
+export const Console      = (level: LogLevel) => createConsoleLog(level);
+
+export const JsonConsoleLog   = createConsoleLog("log", true);
+export const JsonConsoleDebug = createConsoleLog("debug", true);
+export const JsonConsoleTrace = createConsoleLog("trace", true);
+export const JsonConsoleInfo  = createConsoleLog("info", true);
+export const JsonConsoleWarn  = createConsoleLog("warn", true);
+export const JsonConsoleError = createConsoleLog("error", true);
+export const JsonConsole      = (level: LogLevel) => createConsoleLog(level, true);
+
+
+export const LogPerf = Log({ logElapsed: true, logParametersOnExit: true, logEnter: false, logError: false, logExit: true, level: "log" });
+export const LogJsonPerf = Log({ logElapsed: true, logParametersOnExit: true, logEnter: false, logError: false, logExit: true, level: "log", asJson: true });
