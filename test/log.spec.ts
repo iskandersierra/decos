@@ -49,6 +49,15 @@ describe("@ConsoleLog/JsonConsoleLog", () => {
         expect(result).to.be.equal("John is 46 years old");
     });
 
+    it("ConsoleLog should not change decorated function target", () => {
+        // Given foo
+        const foo = new Foo();
+        // When logToConsole is called with parameters "John" and 46
+        const result = foo.logToConsole("John", 46);
+        // Expect logToConsole result to be equal to "John is 46 years old"
+        expect(consoleLog).to.have.been.calledOn(foo);
+    });
+
     it("ConsoleLog should log each parameter individually on the console", () => {
         // Given foo
         const foo = new Foo();
