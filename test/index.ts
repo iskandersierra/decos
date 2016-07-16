@@ -1,1 +1,1 @@
-import {} from './log.spec';
+export * from './log.spec';

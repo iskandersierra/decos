@@ -7,16 +7,12 @@
         "moduleResolution": "node",
         "noImplicitAny": true,
         "target": "es5",
-        "noImplicitAny": false,
-        "sourceMap": false,
-        "outDir": "./dist/"
+        "outDir": "../lib/"
     },
     "exclude": [
-        "node_modules"
     ],
     "files": [
-        "./typings/index.d.ts",
-        "./test/index.ts",
-        "./src/index.ts"
+        "../typings/index.d.ts",
+        "./index.ts"
     ]
 }

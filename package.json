@@ -18,13 +18,14 @@
     "clean": "npm run flow.clean",
     "mocha": "mocha",
 
-    "flow.start": "npm run flow.build && concurrently \"npm run flow.build:watch\" \"npm run flow.test:mocha-watch\"",
-    "flow.build": "tsc",
-    "flow.build:watch": "tsc -w",
-    "flow.clean": "del \"src/test/*.js\" ",
-    "flow.test": "npm run flow.build && npm run flow.test:mocha",
-    "flow.test:mocha": "mocha",
-    "flow.test:mocha-watch": "mocha --watch"
+    "flow.start": "npm run flow.build:test && concurrently \"npm run flow.build:watch\" \"npm run flow.test:mocha-watch\"",
+    "flow.build": "tsc -p src",
+    "flow.build:test": "tsc -p test",
+    "flow.build:watch": "tsc -p test -w",
+    "flow.clean": "del \"test-build/\" ",
+    "flow.test": "npm run flow.build:test && npm run flow.test:mocha",
+    "flow.test:mocha": "mocha ./test-build/test/*.spec.js",
+    "flow.test:mocha-watch": "mocha --watch ./test-build/test/*.spec.js"
   },
   "keywords": [
     "es6",

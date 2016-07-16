@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "sourceMap": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "target": "es5",
+        "outDir": "../test-build/"
+    },
+    "exclude": [
+    ],
+    "files": [
+        "../typings/index.d.ts",
+        "./index.ts",
+        "../src/index.ts"
+    ]
+}

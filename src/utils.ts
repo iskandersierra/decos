@@ -37,7 +37,7 @@ export function decorateFunction<TOptions>(
 
         return (target: any, key: string, descriptor: PropertyDescriptor) => {
             const originalFunction: Function = descriptor.value;
-            const newFunction: Function = (...args): any => {
+            const newFunction: Function = (...args: any[]): any => {
                 let callback: any = () => { originalFunction.apply(target, args); };
                 callback.withArgs = (...newArgs: any[]) => { originalFunction.apply(target, newArgs); };
                 callback.withTarget = (newTarget: any[]) => { originalFunction.apply(newTarget, args); };
