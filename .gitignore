@@ -5,3 +5,5 @@ npm-debug.log*
 /index.js
 /src/**/*.js
 /src/**/*.js.map
+
+/dist/test/**/*.*

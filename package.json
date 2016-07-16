@@ -14,8 +14,11 @@
   "scripts": {
     "start": "tsc -w",
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "del \"index.js\" \"src/*.js\" "
+    "test": "npm run flow.test",
+    "clean": "del \"index.js\" \"src/*.js\" ",
+
+    "flow.test": "npm run flow.build && npm run flow.test:no-build",
+    "flow.test:no-build": "mocha"
   },
   "keywords": [
     "es6",
