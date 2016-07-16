@@ -1,15 +1,20 @@
 {
     "compilerOptions": {
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "sourceMap": true,
         "module": "commonjs",
+        "moduleResolution": "node",
         "target": "es5",
         "noImplicitAny": false,
-        "sourceMap": false
+        "sourceMap": false,
+        "outDir": "./dist/"
     },
     "exclude": [
         "node_modules"
     ],
     "files": [
-        "typings/index.d.ts",
-        "index.ts"
+        "./typings/index.d.ts",
+        "./src/index.ts"
     ]
 }

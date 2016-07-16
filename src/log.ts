@@ -1,4 +1,4 @@
-import { decorateWithOptions } from './private/utils';
+import { decorateWith, decorateWithOptions } from './utils';
 
 export interface LogOptions {
     logEnter?: boolean;
@@ -7,7 +7,7 @@ export interface LogOptions {
     logParametersOnExit?: boolean;
     logResult?: boolean;
     logTime?: boolean;
-    mode?: "log" | "info" | "warn" | "error";
+    logger?: "log" | "info" | "warn" | "error" | { (message: any, ...optionalParams: any[]): void };
 }
 
 export const Log = decorateWithOptions(
@@ -20,7 +20,7 @@ export const Log = decorateWithOptions(
         logParametersOnExit: false,
         logResult: true,
         logTime: false,
-        mode: "log",        // can be log, info, warn or error
+        logger: "log",        // can be log, info, warn or error
     }
 );
 

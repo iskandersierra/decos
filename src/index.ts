@@ -1,2 +1,2 @@
-import { decorateWith, decorateWithOptions } from './private/utils';
+export * from './log';
 
