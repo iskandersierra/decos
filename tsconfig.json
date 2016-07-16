@@ -5,6 +5,7 @@
         "sourceMap": true,
         "module": "commonjs",
         "moduleResolution": "node",
+        "noImplicitAny": true,
         "target": "es5",
         "noImplicitAny": false,
         "sourceMap": false,

@@ -1,18 +1,48 @@
 "use strict";
-function decorateWith(decorator) {
-    return function (target, key, descriptor) {
-        descriptor.value = decorator.call(target, descriptor.value);
-        return descriptor;
-    };
-}
-exports.decorateWith = decorateWith;
-function decorateWithOptions(decorator, defaultOptions) {
+function decorateFunction(defaultOptions, initialize, decorate) {
     return function (options) {
-        options = Object.assign({}, defaultOptions, options);
+        var opts = Object.assign({}, defaultOptions);
+        if (!!options) {
+            opts = Object.assign(opts, options);
+        }
+        if (initialize) {
+            var prevOpts = opts;
+            opts = initialize(opts) || prevOpts;
+        }
         return function (target, key, descriptor) {
-            descriptor.value = decorator.call(target, options, descriptor.value);
+            var originalFunction = descriptor.value;
+            var newFunction = function () {
+                var args = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    args[_i - 0] = arguments[_i];
+                }
+                var callback = function () { originalFunction.apply(target, args); };
+                callback.withArgs = function () {
+                    var newArgs = [];
+                    for (var _i = 0; _i < arguments.length; _i++) {
+                        newArgs[_i - 0] = arguments[_i];
+                    }
+                    originalFunction.apply(target, newArgs);
+                };
+                callback.withTarget = function (newTarget) { originalFunction.apply(newTarget, args); };
+                callback.withTargetAndArgs = function (newTarget) {
+                    var newArgs = [];
+                    for (var _i = 1; _i < arguments.length; _i++) {
+                        newArgs[_i - 1] = arguments[_i];
+                    }
+                    originalFunction.apply(newTarget, newArgs);
+                };
+                return decorate({
+                    options: opts,
+                    target: target,
+                    key: key,
+                    callback: callback,
+                    args: args
+                });
+            };
+            descriptor.value = newFunction;
             return descriptor;
         };
     };
 }
-exports.decorateWithOptions = decorateWithOptions;
+exports.decorateFunction = decorateFunction;
