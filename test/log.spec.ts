@@ -55,7 +55,7 @@ describe("@ConsoleLog/JsonConsoleLog", () => {
         // When logToConsole is called with parameters "John" and 46
         const result = foo.logToConsole("John", 46);
         // Expect logToConsole result to be equal to "John is 46 years old"
-        expect(consoleLog).to.have.been.calledOn(foo);
+        expect(consoleLog).to.have.been.calledOn(console);
     });
 
     it("ConsoleLog should log each parameter individually on the console", () => {
