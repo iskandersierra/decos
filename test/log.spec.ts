@@ -4,9 +4,10 @@ import {
     ConsoleLog, ConsoleDebug, ConsoleTrace, ConsoleInfo, ConsoleWarn, ConsoleError, 
     LogPerf 
     } from '../src/log';
+import { expect } from 'chai';
 
 describe("Log decorator", () => {
     it("should fail", () => {
-        // throw new Error("This is failing");
+        expect(2 + 3).to.be.equal(5);
     })
 });
