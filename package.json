@@ -2,16 +2,27 @@
   "name": "decos",
   "version": "0.0.1",
   "description": "Common and usefull decorators",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iskandersierra/decos.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iskandersierra/decos/issues"
+  },
+  "homepage": "https://github.com/iskandersierra/decos#readme",
   "main": "index.js",
   "scripts": {
     "start": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "./node_modules/.bin/del \"index.js\" \"src/*.js\" "
+    "clean": "del \"index.js\" \"src/*.js\" "
   },
   "keywords": [
     "decorators"
   ],
-  "author": "Iskander Sierra",
+  "author": {
+    "name": "Iskander Sierra",
+    "email": "iskander.sierra@gmail.com"
+  },
   "license": "ISC",
   "devDependencies": {
     "core-js": "^2.4.0",
