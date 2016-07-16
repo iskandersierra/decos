@@ -12,13 +12,19 @@
   "homepage": "https://github.com/iskandersierra/decos#readme",
   "main": "index.js",
   "scripts": {
-    "start": "tsc -w",
-    "build": "tsc",
+    "start": "npm run flow.start",
+    "build": "npm run flow.build",
     "test": "npm run flow.test",
-    "clean": "del \"index.js\" \"src/*.js\" ",
+    "clean": "npm run flow.clean",
+    "mocha": "mocha",
 
-    "flow.test": "npm run flow.build && npm run flow.test:no-build",
-    "flow.test:no-build": "mocha"
+    "flow.start": "npm run flow.build && concurrently \"npm run flow.build:watch\" \"npm run flow.test:mocha-watch\"",
+    "flow.build": "tsc",
+    "flow.build:watch": "tsc -w",
+    "flow.clean": "del \"src/test/*.js\" ",
+    "flow.test": "npm run flow.build && npm run flow.test:mocha",
+    "flow.test:mocha": "mocha",
+    "flow.test:mocha-watch": "mocha --watch"
   },
   "keywords": [
     "es6",
